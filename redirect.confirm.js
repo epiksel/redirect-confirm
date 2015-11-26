@@ -1,16 +1,18 @@
 // Redirect Confirm
-// Version   : 1.0.0
+// Version   : 1.0.1
 // Developer : Ekrem KAYA
 // Website   : http://e-piksel.com
 // GitHub    : https://github.com/epiksel/redirect-confirm
 
 !(function ($) {
-	$.fn.RedirectConfirm	= function(options) {
+	$.fn.RedirectConfirm = function(options) {
 		var defaults = {
+			selector: 'a',
 			title: 'Exiting our website',
 			message: 'You are now leaving our website. We are not responsible for any external Web sites or their content.',
 			continuelbl: 'Continue',
-			returnlbl: 'Return'
+			returnlbl: 'Return',
+			targetUrl: '_blank'
 		};
 
 		var options = $.extend(defaults, options);
@@ -22,7 +24,7 @@
 
 		var currentDomain = getDomain(location.hostname);
 		var link = new Array();
-		$('a').each(function() {
+		$(options.selector).each(function() {
 
 			var $modal = $('<div id="redirectconfirm-modal" class="modal fade">\
 				<div class="modal-dialog">\
@@ -36,7 +38,7 @@
 						</div>\
 						<div class="modal-footer">\
 							<a href="#" class="btn btn-default" data-dismiss="modal">' + options.returnlbl + '</a>\
-							<a href="' + $(this).attr("href") + '" class="btn btn-primary btn-continue">' + options.continuelbl + '</a>\
+							<a href="' + $(this).attr("href") + '" target="' + options.targetUrl + '" class="btn btn-primary btn-continue">' + options.continuelbl + '</a>\
 						</div>\
 					</div>\
 				</div>\
@@ -62,6 +64,10 @@
 
 						$modal.on('hide', function() {
 							confirmed = false;
+						});
+
+						$modal.find('.btn-continue').click(function() {
+							$modal.modal('hide');
 						});
 
 						$modal.find('.modal-body > p').html(options.message.replace('{url}', $a.attr('href')));
