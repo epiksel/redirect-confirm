@@ -1,8 +1,14 @@
-#Redirect Confirm
+TronLink Wallet Address
+=========
+**TRX - BTC - BTT - USDT**: TH9RyofE7WiDDVVFLMJgFns2ByBRmgQzNB
+
+Redirect Confirm
+=========
 
 Redirect Confirm Popup Message with Bootstrop 3
 
-#Usage
+Usage
+=========
 
 ```JS
 $(document).ready(function() {
@@ -18,7 +24,8 @@ $(document).ready(function() {
 });
 ```
 
-#Options
+Options
+=========
 Option | Description
 ---|---
 selector | Your `a` tag selector class
